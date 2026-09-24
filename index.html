@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Karnaugh Map Trainer</title>
+</head>
+<body>
+  <div id="app">
+
+    <h1>Karnaugh Map Trainer</h1>
+
+    <!-- Variable count & Controls -->
+    <div id="controls-bar">
+      <div id="var-sel">
+        <span class="sel-label">Variables:</span>
+        <button class="vbtn" data-v="2">2</button>
+        <button class="vbtn active" data-v="3">3</button>
+        <button class="vbtn" data-v="4">4</button>
+      </div>
+      <button id="btn-new" class="action-btn">New Problem</button>
+      <button id="btn-clear" class="action-btn">Clear Groups</button>
+    </div>
+
+    <!-- Main two-column panel -->
+    <div id="panel">
+
+      <!-- LEFT: K-map -->
+      <section id="kmap-wrap">
+        
+        <div id="kmap-container" style="position:relative; margin: 2rem;">
+          <div id="axis-lines"></div>
+          
+          
+          <table id="kmap">
+            <thead><tr></tr></thead>
+            <tbody></tbody>
+          </table>
+        
+        </div>
+        <div id="group-controls">
+          <span class="hint">Ctrl+Click to select cells</span>
+          
+        </div>
+      </section>
+
+      <!-- RIGHT: Truth table -->
+      <section id="truth-wrap">
+        <table id="truth">
+          <thead>
+            <tr id="truth-head-row">
+              <th>n</th>
+              <th id="truth-var-th">Variables</th>
+              <th>f(x)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+    </div><!-- /panel -->
+
+    <!-- Solution bar -->
+    <div id="sol">
+      <span class="sol-lbl">Equation:</span>
+      <input id="sol-in" type="text" placeholder="e.g. A*B + C' (Optional)" autocomplete="off">
+      <button id="sol-btn">Check!</button>
+    </div>
+
+    <div id="feedback"></div>
+
+  </div><!-- /app -->
+  <script src="index.js"></script>
+</body>
+</html>

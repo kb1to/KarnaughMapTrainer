@@ -1,0 +1,375 @@
+/* ── Palette ────────────────────────────────────────────── */
+:root {
+  --bg:     #3d2428;
+  --card:   #e5f9e0;
+  --cell:   #a3f7b5;
+  --accent: #40c9a2;
+  --strong: #2f9c95;
+  --plum:   #664147;
+  --light:  #e5f9e0;
+  --radius: 0.5rem;
+}
+
+/* ── Reset ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+/* ── App shell ───────────────────────────────────────────── */
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  padding: 2rem 1rem;
+}
+
+/* ── Title ───────────────────────────────────────────────── */
+h1 {
+  color: var(--accent);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  border-bottom: 3px solid var(--strong);
+  padding-bottom: 0.35rem;
+}
+
+/* ── Variable selector ───────────────────────────────────── */
+#var-sel {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.sel-label {
+  color: var(--light);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.03em;
+}
+
+.vbtn {
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 2px solid var(--accent);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--accent);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.vbtn:hover {
+  background: var(--accent);
+  color: var(--plum);
+}
+
+.vbtn.active {
+  background: var(--accent);
+  color: var(--plum);
+}
+
+/* ── Panel ───────────────────────────────────────────────── */
+#panel {
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── K-map section ───────────────────────────────────────── */
+#kmap-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.axis {
+  color: var(--light);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.col-ax {
+  align-self: flex-end;
+  padding-right: 0.4rem;
+}
+
+.km-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.row-ax {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* K-map table */
+#kmap {
+  border-collapse: collapse;
+}
+
+#kmap th,
+#kmap td {
+  width: 3.5rem;
+  height: 3.5rem;
+  text-align: center;
+  vertical-align: middle;
+  border: 2px solid var(--strong);
+  font-size: 1rem;
+}
+
+#kmap thead th,
+#kmap tbody th {
+  background: var(--strong);
+  color: var(--light);
+  font-weight: 700;
+}
+
+/* Corner cell — transparent */
+#kmap thead th:first-child {
+  background: transparent;
+  border-color: transparent;
+}
+
+#kmap td {
+  background: var(--cell);
+  color: var(--plum);
+  font-weight: 700;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+#kmap td:hover {
+  background: var(--accent);
+  color: var(--light);
+}
+
+/* ── Truth table ─────────────────────────────────────────── */
+#truth-wrap {
+  overflow-x: auto;
+}
+
+#truth {
+  border-collapse: collapse;
+  min-width: 16rem;
+}
+
+#truth thead th {
+  background: var(--strong);
+  color: var(--light);
+  padding: 0.55rem 1rem;
+  font-size: 0.85rem;
+  text-align: center;
+  border: 1px solid var(--accent);
+}
+
+#truth tbody td {
+  background: var(--card);
+  color: var(--plum);
+  text-align: center;
+  padding: 0.45rem 1rem;
+  border: 1px solid var(--accent);
+  font-size: 0.95rem;
+}
+
+#truth tbody tr:nth-child(even) td {
+  background: var(--cell);
+}
+
+/* ── Solution bar ────────────────────────────────────────── */
+#sol {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  background: var(--accent);
+  border-radius: 2rem;
+  padding: 0.7rem 1.4rem;
+  width: min(480px, 90vw);
+}
+
+.sol-lbl {
+  color: var(--plum);
+  font-weight: 800;
+  font-size: 1.05rem;
+  white-space: nowrap;
+}
+
+#sol-in {
+  flex: 1;
+  border: none;
+  border-radius: 1rem;
+  padding: 0.45rem 0.9rem;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--plum);
+  font-size: 1rem;
+  outline: none;
+}
+
+#sol-in::placeholder {
+  color: var(--plum);
+  opacity: 0.55;
+}
+
+#sol-in:focus {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+#sol-btn {
+  background: var(--strong);
+  color: var(--light);
+  border: none;
+  border-radius: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#sol-btn:hover {
+  background: var(--plum);
+}
+
+/* ── Additional Controls & JS States ─────────────────────── */
+#controls-bar {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.action-btn {
+  background: var(--strong);
+  color: var(--light);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.5rem 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+.action-btn:hover {
+  background: var(--accent);
+  color: var(--plum);
+}
+
+#group-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.hint {
+  color: var(--light);
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+#feedback {
+  margin-top: 1rem;
+  font-weight: 700;
+  text-align: center;
+  min-height: 1.5rem;
+  color: var(--light);
+}
+.fb-success { color: #a3f7b5 !important; }
+.fb-error { color: #ff8fa3 !important; }
+
+/* K-map cell states */
+#kmap td.cell-selected {
+  box-shadow: inset 0 0 0 4px var(--plum);
+  background: var(--light);
+}
+#kmap td.val-X {
+  color: rgba(102, 65, 71, 0.5); /* translucent plum */
+}
+
+/* Locked groups */
+.group-0 { background: #ffadad !important; }
+.group-1 { background: #ffd6a5 !important; }
+.group-2 { background: #fdffb6 !important; color: var(--plum); }
+.group-3 { background: #caffbf !important; color: var(--plum); }
+.group-4 { background: #9bf6ff !important; }
+.group-5 { background: #a0c4ff !important; }
+.group-6 { background: #bdb2ff !important; }
+.group-7 { background: #ffc6ff !important; }
+
+/* Truth table highlights based on groups */
+#truth tbody tr.group-0 td { background: #ffadad !important; }
+#truth tbody tr.group-1 td { background: #ffd6a5 !important; }
+#truth tbody tr.group-2 td { background: #fdffb6 !important; }
+#truth tbody tr.group-3 td { background: #caffbf !important; }
+#truth tbody tr.group-4 td { background: #9bf6ff !important; }
+#truth tbody tr.group-5 td { background: #a0c4ff !important; }
+#truth tbody tr.group-6 td { background: #bdb2ff !important; }
+#truth tbody tr.group-7 td { background: #ffc6ff !important; }
+
+
+/* Axis Lines */
+#kmap-container {
+  margin: 4rem 4rem 1rem 4rem !important;
+}
+
+.var-line {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  box-sizing: border-box;
+}
+
+.var-line.top-axis {
+  border: 3px solid var(--accent);
+  border-bottom: none;
+  height: 0.5rem;
+}
+.var-line.top-axis .var-name {
+  position: absolute;
+  top: -1.6rem;
+}
+
+.var-line.left-axis {
+  border: 3px solid var(--accent);
+  border-right: none;
+  width: 0.5rem;
+}
+.var-line.left-axis .var-name {
+  position: absolute;
+  left: -1.5rem;
+}
+
+/* Editable variable names */
+.var-name {
+  font-weight: 800;
+  font-size: 1.1rem;
+  outline: none;
+  cursor: text;
+  background: var(--bg);
+  padding: 0 0.2rem;
+  border-radius: 4px;
+  line-height: 1;
+}
+.var-name:focus {
+  background: rgba(255,255,255,0.2);
+}
